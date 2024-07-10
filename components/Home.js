@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 const Home = ({ image, title, description, price, icon,onPress }) => {
   return (
     <View>
-      <View style={styles.imagem}>
+      <View>
       <Image source = {{uri: image}} style={styles.picture} />
         <TouchableOpacity onPress= {onPress}>
         <View style={styles.icons}>
