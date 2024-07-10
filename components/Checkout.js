@@ -1,7 +1,11 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Button,  } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
+
 const CartsClothes = ({ image, title, description, price, icon , onPressRemove}) => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.image}>
@@ -11,6 +15,11 @@ const CartsClothes = ({ image, title, description, price, icon , onPressRemove})
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
         <Text style={styles.amount}>{price}</Text>
+        <Button
+                title="View Details"
+                onPress={() => navigation.navigate("DetailScreen") }
+                color="brown" 
+            />
         <TouchableOpacity onPress= {onPressRemove}>
         <View style={styles.icons}>
           <Image source={icon} />
