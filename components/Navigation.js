@@ -1,7 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { DrawerContentScrollView, createDrawerNavigator, DrawerItemList } from "@react-navigation/drawer";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer , useNavigation} from "@react-navigation/native";
+import { Entypo } from '@expo/vector-icons';
 import Homescreen from "../Homescreen";
 import Cartscreen from "../Cartscreen";
 import Locations from "../Locations";
@@ -9,14 +10,22 @@ import Blog from "../Blog";
 import Jewelery from "../Jewelery";
 import Electronic from "../Electronic";
 import Clothing from "../Clothing";
+import DetailScreen from "../DetailScreen";
+import HomeScreen from "../Homescreen";
 
 const CustomDrawer = (props) => {
+  //const navigation = useNavigation();
   return (
     <DrawerContentScrollView {...props}>
 
     <View style = {{marginBottom:25, width:150, alignItems:"center", gap: 5}}>
-    <Text style= {{fontWeight:"700", fontSize: 20, letterSpacing: 2, marginTop:10}}>Brunella</Text>
-    <View style = {{borderBottomWidth: 1, width: 100, borderBottomColor: "orange"}}></View>
+    <TouchableOpacity
+     onPress={() => props.navigation.closeDrawer()}
+    >
+    <Entypo name="cross" size={24} color="black"  style = {{marginRight: 100}}/>
+    </TouchableOpacity>
+    <Text style= {{fontWeight:"700", fontSize: 20, letterSpacing: 2, marginTop:10,marginRight: 30}}>Brunella</Text>
+    <View style = {{borderBottomWidth: 1, width: 100, borderBottomColor: "orange",marginRight: 20}}></View>
     </View>
     <DrawerItemList {...props}/>
     </DrawerContentScrollView>
@@ -24,6 +33,7 @@ const CustomDrawer = (props) => {
 };
 
 const Drawer = createDrawerNavigator();
+
 const Navigation = () => {
   return (
     <Drawer.Navigator
@@ -44,7 +54,7 @@ const Navigation = () => {
     >
       <Drawer.Screen
         name="Store"
-        component={Homescreen}
+        component={HomeScreen}
         options={{
           headerShown: false,
         }}
@@ -93,6 +103,15 @@ const Navigation = () => {
         component={Cartscreen}
         options={{
           headerShown: false,
+          drawerLabel: () => null, title: null,
+        }}
+      />
+        <Drawer.Screen
+        name="DetailScreen"
+        component={DetailScreen}
+        options={{
+          headerShown: false,
+          drawerLabel: () => null, title: null,
         }}
       />
     </Drawer.Navigator>
