@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { DrawerContentScrollView, createDrawerNavigator, DrawerItemList } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import Homescreen from "../Homescreen";
 import Cartscreen from "../Cartscreen";
@@ -10,11 +10,24 @@ import Jewelery from "../Jewelery";
 import Electronic from "../Electronic";
 import Clothing from "../Clothing";
 
+const CustomDrawer = (props) => {
+  return (
+    <DrawerContentScrollView {...props}>
+
+    <View style = {{marginBottom:25, width:150, alignItems:"center", gap: 5}}>
+    <Text style= {{fontWeight:"700", fontSize: 20, letterSpacing: 2, marginTop:10}}>Brunella</Text>
+    <View style = {{borderBottomWidth: 1, width: 100, borderBottomColor: "orange"}}></View>
+    </View>
+    <DrawerItemList {...props}/>
+    </DrawerContentScrollView>
+  );
+};
+
 const Drawer = createDrawerNavigator();
 const Navigation = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="Homescreen"
+      initialRouteName="Store"
       screenOptions={({ navigation }) => ({
         headerLeft: () => {
           return (
@@ -27,13 +40,16 @@ const Navigation = () => {
           );
         },
       })}
+      drawerContent={(props)=> <CustomDrawer {...props} />}
     >
       <Drawer.Screen
-        name="HomeScreen"
+        name="Store"
         component={Homescreen}
         options={{
           headerShown: false,
         }}
+
+        initialRoutine="Homescreen"
       />
       <Drawer.Screen
         name="Locations"
